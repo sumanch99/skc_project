@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+  <welcome-file-list>
+  		<welcome-file>index</welcome-file>
+  </welcome-file-list>
+
+  <context-param>
+  		<param-name>driver</param-name>
+  		<param-value>org.postgresql.Driver</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>connection</param-name>
+  		<param-value>jdbc:postgresql://ec2-34-194-198-176.compute-1.amazonaws.com:5432/d4kkgmrhqf44i0?ssl=require</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>user</param-name>
+  		<param-value>nqcaetdghztlsb</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>password</param-name>
+  		<param-value>30e6757f9a01b284397b807d83d7995a4958f1345c8baedfa7d1c21892e70d4e</param-value>
+  </context-param>
+  <dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.12</version>
+</dependency> 
+
+</web-app>

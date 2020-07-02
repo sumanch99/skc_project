@@ -1,0 +1,112 @@
+Host: ec2-34-194-198-176.compute-1.amazonaws.com
+Database: d4kkgmrhqf44i0
+User: nqcaetdghztlsb
+Port: 5432
+Password: 30e6757f9a01b284397b807d83d7995a4958f1345c8baedfa7d1c21892e70d4e
+
+URI:postgres://nqcaetdghztlsb:30e6757f9a01b284397b807d83d7995a4958f1345c8baedfa7d1c21892e70d4e@ec2-34-194-198-176.compute-1.amazonaws.com:5432/d4kkgmrhqf44i0
+Heroku CLI:heroku pg:psql postgresql-convex-36742 --app scnstock
+
+ec2-34-194-198-176.compute-1.amazonaws.com
+d4kkgmrhqf44i0
+
+nqcaetdghztlsb
+
+
+Deployment Descriptor: driver,connection,user,password
+
+CREATE TABLE login_user (
+  user_name VARCHAR(355) PRIMARY KEY UNIQUE NOT NULL,
+  name VARCHAR(355) NOT NULL,
+  email VARCHAR(355) UNIQUE NOT NULL,
+  password VARCHAR(355) UNIQUE NOT NULL,
+  contact_number VARCHAR(15) NOT NULL,
+  activeUser BOOLEAN NOT NULL
+ );
+
+ CREATE TABLE pending_user (
+  user_name VARCHAR(355) PRIMARY KEY UNIQUE NOT NULL,
+  name VARCHAR(355) NOT NULL,
+  email VARCHAR(355) UNIQUE NOT NULL,
+  password VARCHAR(355) UNIQUE NOT NULL,
+  contact_number VARCHAR(15) NOT NULL
+ );
+
+CREATE TABLE super_user (
+	user_name VARCHAR(355) PRIMARY KEY UNIQUE NOT NULL,
+	password VARCHAR(355) NOT NULL
+);
+
+CREATE TABLE inward_head (
+  inward_id SERIAL PRIMARY KEY UNIQUE NOT NULL,
+  transport_name VARCHAR(355) NOT NULL,
+  from_station VARCHAR(355) NOT NULL,
+  dispatch_date VARCHAR(15) NOT NULL,
+  challan_no VARCHAR(50) NOT NULL UNIQUE,
+  challan_date VARCHAR(15) NOT NULL,
+  lorry_no VARCHAR(15) NOT NULL,
+  arrival_date VARCHAR(15) NOT NULL,
+  total_bales VARCHAR(10) NOT NULL,
+  user_name VARCHAR(355) NOT NULL
+ );
+
+CREATE TABLE consigner_master(
+	consigner_id SERIAL PRIMARY KEY UNIQUE NOT NULL,
+	consigner_name VARCHAR(355) NOT NULL,
+	consigner_code VARCHAR(355) UNIQUE NOT NULL,
+	address VARCHAR(355) NOT NULL,
+	contact_no VARCHAR(355) NOT NULL,
+	GST_no VARCHAR(355) NOT NULL
+);
+
+CREATE TABLE quality_master(
+	quality_id SERIAL PRIMARY KEY UNIQUE NOT NULL,
+	quality VARCHAR(355) UNIQUE NOT NULL,
+	consigner_id VARCHAR(355) NOT NULL,
+	hsn_code VARCHAR(355) NOT NULL,
+	quality_description VARCHAR(355) NOT NULL,
+	cgst_rate FLOAT NOT NULL,
+	sgst_rate FLOAT NOT NULL
+);
+
+CREATE TABLE inward_details(
+	inward_details_id SERIAL PRIMARY KEY UNIQUE NOT NULL,
+	inward_id VARCHAR(15) NOT NULL,
+	consigner_id VARCHAR(15) NOT NULL,
+	bill_no VARCHAR(15) NOT NULL,
+	bill_date VARCHAR(15) NOT NULL,
+	lr_no VARCHAR(15) UNIQUE NOT NULL
+);
+
+CREATE TABLE inward_lr_details(
+	inward_lr_details_id SERIAL PRIMARY KEY UNIQUE NOT NULL,
+	inward_details_id NUMERIC NOT NULL,
+	bal_cartoon_no VARCHAR UNIQUE NOT NULL,
+	bal_cartoon_type VARCHAR(7) NOT NULL,
+	no_of_pieces NUMERIC NOT NULL,
+	quality_id NUMERIC NOT NULL,
+	rate BIGINT NOT NULL,
+	outward_flag BOOLEAN NOT NULL
+);
+
+CREATE TABLE order_head(
+	date VARCHAR UNIQUE NOT NULL,
+	order_no SERIAL PRIMARY KEY UNIQUE NOT NULL,
+	bal_id SERIAL UNIQUE NOT NULL
+);
+
+CREATE TABLE outward_bales(
+	bal_id VARCHAR NOT NULL,
+	inward_lr_details_id NUMERIC NOT NULL
+);
+
+CREATE TABLE order_details(
+	order_detils_id SERIAL PRIMARY KEY UNIQUE NOT NULL,
+	order_no NUMERIC UNIQUE NOT NULL,
+	from_godown VARCHAR NOT NULL,
+	to_shop VARCHAR NOT NULL,
+	total_bales NUMERIC NOT NULL,
+	mutia VARCHAR NOT NULL,
+	vehicle_no VARCHAR NOT NULL
+);
+

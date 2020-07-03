@@ -25,7 +25,25 @@ public class S_Report extends HttpServlet
 			rd.forward(req,res);
 		}
 		try{
-
+			Class.forName(ctx.getInitParameter("driver")).newInstance();
+	        con = DriverManager.getConnection(ctx.getInitParameter("connection"),ctx.getInitParameter("user"),ctx.getInitParameter("password"));		
+			st=con.createStatement();
+			rs=st.executeQuery("SELECT quality,hsn_code,quality_description,cgst_rate,sgst_rate,n FROM quality_master JOIN (SELECT DISTINCT quality_id,SUM(no_of_pieces) n FROM (SELECT quality_id,no_of_pieces FROM inward_lr_details WHERE outward_flag='f') AS x GROUP BY quality_id) AS Y ON (quality_master.quality_id=Y.quality_id)");
+			List<List> rows = new ArrayList<>();
+			while(rs.next())
+			{
+				List<String> cols = new ArrayList<>();
+				cols.add(rs.getString(1));
+				cols.add(rs.getString(2));
+				cols.add(rs.getString(3));
+				cols.add(rs.getString(4));
+				cols.add(rs.getString(5));
+				cols.add(rs.getString(6));
+				rows.add(cols);
+			}
+			session.setAttribute("stock",rows);
+			rd=req.getRequestDispatcher("S_Report.jsp");
+			rd.forward(req,res);
 		}
 		catch(ClassNotFoundException e)
 		{

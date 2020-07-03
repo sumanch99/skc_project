@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.sql.*;
 
-@WebServlet("/index")
+@WebServlet("/controller")
 public class Controller extends HttpServlet
 {
 	public void service(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException

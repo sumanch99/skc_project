@@ -100,16 +100,20 @@ if(flag==0)
 	<br><br>
 <%
 }
+String from_date="2020-07-03";
+String to_date="2020-07-03";
 List<List> tranport_report_head = (ArrayList)session.getAttribute("tranport_report_head");
-String from_date = session.getAttribute("from").toString();
-String to_date = session.getAttribute("to").toString();
+if(session.getAttribute("from")!=null){
+	from_date = session.getAttribute("from").toString();
+	to_date = session.getAttribute("to").toString();
+}
 if(flag==1)
 {%>
 	<div class="container">
 	<br>
 	<h3 class="card-title text-center">Choose Date to Show Report</h3>
 			<!--<div class="jumbotron" style="background-color:#839192 ;">-->
-	<form action="T_Report" method="POST">
+	<form action="T_Report" method="GET">
 	  	<div class="form-row">
 	   	 <div class="form-group col-md-6">
 	      <label for="From Date">From Date</label>

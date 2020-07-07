@@ -32,6 +32,8 @@ public class UserEntry extends HttpServlet
 		String number=req.getParameter("number");
 		String password=req.getParameter("password");
 
+		String password1=req.getParameter("password");
+
 		try{
 			password = hashPassword(password);
 		}catch(NoSuchAlgorithmException e)
@@ -51,27 +53,27 @@ public class UserEntry extends HttpServlet
 	        rs=st.executeQuery("SELECT * from login_user WHERE user_name='"+username+"'");
 	        if(rs.next())
 	        {
+	        	session.setAttribute("fl",1);
+	        	session.setAttribute("name",name);
+	        	session.setAttribute("uname",username);
+	        	session.setAttribute("email",email);
+	        	session.setAttribute("number",number);
+	        	session.setAttribute("password",password1);
 	        	rd=req.getRequestDispatcher("EntryFailedUser.jsp");
 	        	rd.forward(req,res);
+
 	        }
 	        
-	        else{ 
-	        	rs=st.executeQuery("SELECT * from login_user WHERE password='"+password+"'");
-		        if(rs.next())
-		        {
-		        	rd=req.getRequestDispatcher("EntryFailedUser.jsp");
-		        	rd.forward(req,res);
-		        }
 		        else
 		        {
 		        	i=(int)st.executeUpdate("INSERT INTO pending_user (user_name,name,email,password,contact_number) VALUES ('"+username+"','"+name+"','"+email+"','"+password+"','"+number+"')");
 			        if(i>0)
 			        {
+			        	session.setAttribute("fl",0);
 			        	rd=req.getRequestDispatcher("EntrySuccessUser.jsp");
 			        	rd.forward(req,res);
 			        }
 		    	}
-		    }
 		}catch(ClassNotFoundException e)
 	    {
 	    	res.getWriter().print("ClassNotFoundException !");

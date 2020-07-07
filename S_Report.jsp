@@ -127,6 +127,7 @@ List<List> stock = (ArrayList)session.getAttribute("stock");
 </div>
 </div>
 <br><br>
+<center><b>Go to <a href="T_Report">Transport Report</a></b></center>
 <br><br>
 <!-- footer -->
 		<div class="agileits-w3layouts-footer">

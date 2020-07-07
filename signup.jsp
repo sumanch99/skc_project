@@ -119,7 +119,60 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h2 class="agileits-title">User Sign UP</h2>
 		</div>
 	</div>
-
+<%
+	int fl=0; 
+	if(session.getAttribute("fl")!=null)
+	{
+		fl=(int) session.getAttribute("fl");
+		if(fl==1){
+		String name=session.getAttribute("name").toString();
+		String uname=session.getAttribute("uname").toString();
+		String email=session.getAttribute("email").toString();
+		String number=session.getAttribute("number").toString();
+		String password=session.getAttribute("password").toString();
+		%>
+<form action="userentry" method="post" onsubmit="return validate();">
+	<div class="container"> 
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Name">Name</label>
+      <input type="text" class="form-control" placeholder="Name" id="name" value="<%=name%>" name="name" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Username">Username</label>
+      <input type="text" class="form-control" placeholder="Username" id="username" value="<%=uname%>" name="username" required>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label name = "Email">Email</label>
+      <input type="email" class="form-control" placeholder="Email" id="email" value="<%=email%>" name="email" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Number">Number</label>
+      <input type="text" class="form-control" placeholder="Number" id="number" value="<%=number%>" name="number" required>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Password">Password</label>
+      <input type="password" class="form-control" placeholder="Password" value="<%=password%>" id="password"name="password" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Password">Confirm Password</label>
+      <input type="password" class="form-control" placeholder="Confirm Password" value="<%=password%>" id="password2" name="password2" required>
+    </div>
+</div>
+</div>
+    <center>
+  &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-secondary">SignUp</button>
+  <button type="reset" class="btn btn-danger">Clear</button>
+</center>
+</form>
+<%}
+else{
+%>
 <form action="userentry" method="post" onsubmit="return validate();">
 	<div class="container"> 
 <div class="form-row">
@@ -135,7 +188,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="form-row">
     <div class="form-group col-md-6">
       <label name = "Email">Email</label>
-      <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
+      <input type="email" class="form-control" placeholder="Email" id="email"  name="email" required>
     </div>
     <div class="form-group col-md-6">
       <label for="Number">Number</label>
@@ -159,68 +212,54 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <button type="reset" class="btn btn-danger">Clear</button>
 </center>
 </form>
+<%
+}
+}
+else{
+%>
+<form action="userentry" method="post" onsubmit="return validate();">
+	<div class="container"> 
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Name">Name</label>
+      <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Username">Username</label>
+      <input type="text" class="form-control" placeholder="Username" id="username" name="username" required>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label name = "Email">Email</label>
+      <input type="email" class="form-control" placeholder="Email" id="email"  name="email" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Number">Number</label>
+      <input type="text" class="form-control" placeholder="Number" id="number" name="number" required>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Password">Password</label>
+      <input type="password" class="form-control" placeholder="Password" id="password"name="password" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Password">Confirm Password</label>
+      <input type="password" class="form-control" placeholder="Confirm Password" id="password2" name="password2" required>
+    </div>
+</div>
+</div>
+    <center>
+  &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-secondary">SignUp</button>
+  <button type="reset" class="btn btn-danger">Clear</button>
+</center>
+</form>
+<%
+}
+%>
 
-			<!--<table>
-				<tr>
-					<td>Name<font color="red">*</font></td>
-					<td><input type="text" name="name" id="name" placeholder="Enter name here" autocomplete="off" required></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>Username<font color="red">*</font></td>
-					<td><input type="text" name="username" id="username" placeholder="Enter username here" autocomplete="off" required></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>Email<font color="red">*</font></td>
-					<td><input type="email" name="email" id="email" placeholder="Enter email id here" autocomplete="off" required></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>Contact Number<font color="red">*</font></td>
-					<td> <input type="text" name="number" id="number" placeholder="Enter number here" required></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>Password<font color="red">*</font></td>
-					<td><input type="password" name="password" id="password" placeholder="Enter password here" required></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>Confirm Password<font color="red">* </font></td>
-					<td><input type="password" name="password2" id="password2" placeholder="confirm password here" required></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>Address</td>
-					<td><textarea name="address" id="address" rows="3" cols="22" autocomplete="off" value="ff">
-					</textarea></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-			</table><br>
-			<table>
-				<tr><input type="submit" value="Sign Up">&nbsp;&nbsp;<input type="reset" value="clear"></tr>
-			</table>
-			<table>
-						<input type="text" name="username" placeholder="" required="Enter username here">
-						<input class="email" type="password" name="password" placeholder="Enter password here" required=""><input type="checkbox" onclick="return showPassword();"> show
-					</table>
-						<input type="submit" value="SUBMIT">&nbsp;&nbsp;<input type="reset" value="clear"></tr>&nbsp;&nbsp;
-				<a href="#">forgot password?</a>-->
 		<br><br>
 		<center>
 		Already registered?<a href="userlogin" style="color:blue;text-decoration: none;"><i> click here to Log

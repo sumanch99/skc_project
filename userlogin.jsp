@@ -40,27 +40,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="w3-banner-1 jarallax">
 			<div class="w3layouts-header-top">
 		
-			<!--<div class="w3layouts-header-top">
-				<div class="container">
-					<div class="w3-header-top-grids">
-						<div class="w3-header-top-left">
-							<p>Goralmal Balmokand</p>
-						</div>
-						<div class="w3-header-top-right">
-							<div class="agileinfo-social-grids">
-								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-rss"></i></a></li>
-									<li><a href="#"><i class="fa fa-vk"></i></a></li>
-								</ul>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>-->
 			<div class="head">
 				<div class="container">
 					<div class="navbar-top">
@@ -93,9 +72,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 
+
 	<!--header-->
 	<!-- //w3-banner -->
 	<!-- contact -->
+	<%
+	int flag=0; 
+	if(session.getAttribute("flag")!=null)
+	{
+		flag=(int) session.getAttribute("flag");
+		if(flag==1){
+		String uname=session.getAttribute("uname").toString();
+		String pwd=session.getAttribute("pwd").toString();
+		%>
+		<div class="contact agileits">
+		<div class="container"> 
+			<h2 class="agileits-title">User Login</h2></div></div>
+<form action="dashboard" method="post">
+		<form action="dashboard" method="post">
+<div class="container" style="max-width: 60%;"> 
+	<div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" placeholder="username" name="username" id="username" value="<%=uname%>"required>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" placeholder="password" value="<%=pwd%>" id="password" required>
+      <input type="checkbox" onclick="showPassword()"> Show Password
+    </div>
+  </div>
+</div>
+<center>
+  &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-secondary">LogIn</button>
+  <button type="reset" class="btn btn-danger">Clear</button>
+</center>
+</form>
+<%}
+else{
+%>
+
 	<div class="contact agileits">
 		<div class="container"> 
 			<h2 class="agileits-title">User Login</h2></div></div>
@@ -118,8 +134,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <button type="reset" class="btn btn-danger">Clear</button>
 </center>
 </form>
+<%
+}
+}
+else{
+%>
+<div class="contact agileits">
+		<div class="container"> 
+			<h2 class="agileits-title">User Login</h2></div></div>
+<form action="dashboard" method="post">
+<form action="dashboard" method="post">
+<div class="container" style="max-width: 60%;"> 
+	<div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" placeholder="username" name="username" id="username" required>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" placeholder="password" id="password" required>
+      <input type="checkbox" onclick="showPassword()"> Show Password
+    </div>
+  </div>
+</div>
+<center>
+  &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-secondary">LogIn</button>
+  <button type="reset" class="btn btn-danger">Clear</button>
+</center>
+</form>
+<%
+}
+%>
 <br><br>
-				<center>
+<center>
 				Not registered?<a href="signup" style="color:blue;text-decoration: none;"><i> click here to sign up</i></a>
 	</center><br><br><br><br>
 	<!-- //contact -->  

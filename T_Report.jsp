@@ -234,7 +234,9 @@ if(flag==1)
 	</div>
 <%}%>
 <br><br>
+<center><b>Go to <a href="S_Report">Stock Report</a></b></center>
 <br><br>
+
 <!-- footer -->
 		<div class="agileits-w3layouts-footer">
 			<div class="container">

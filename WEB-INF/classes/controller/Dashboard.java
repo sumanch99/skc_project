@@ -37,6 +37,7 @@ public class Dashboard extends HttpServlet
 
 		String uname=req.getParameter("username");
 		String pwd=req.getParameter("password");
+		String pwd1=req.getParameter("password");
 
 		try{
 			pwd = hashPassword(pwd);
@@ -55,8 +56,6 @@ public class Dashboard extends HttpServlet
 		Statement st = null;
 		ResultSet rs = null;
 
-		
-
 		try{
 			Class.forName(ctx.getInitParameter("driver")).newInstance();
 	        con = DriverManager.getConnection(ctx.getInitParameter("connection"),ctx.getInitParameter("user"),ctx.getInitParameter("password"));
@@ -64,12 +63,16 @@ public class Dashboard extends HttpServlet
 	        rs=st.executeQuery("SELECT * FROM login_user where user_name ='"+uname+"' AND password ='"+pwd+"'" );
 	        if(rs.next())
 	        {
+	        	session.setAttribute("flag",0);
 	        	session.setAttribute("user_name",rs.getString("user_name"));
 	        	RequestDispatcher rd=req.getRequestDispatcher("dashboard.jsp");
 				rd.forward(req,res);
 	        }
 	        else{
 	        	session = req.getSession();
+	        	session.setAttribute("uname",uname);
+	        	session.setAttribute("pwd",pwd1);
+	        	session.setAttribute("flag",1);
 	        	session.setAttribute("invalid_action","userlogin.jsp");
 	        	RequestDispatcher rd=req.getRequestDispatcher("invalid.jsp");
 				rd.forward(req,res);
